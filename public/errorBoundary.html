@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Error Boundary Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #normalUI { padding: 10px; background: #e0ffe0; }
+    #errorUI { padding: 10px; background: #ffe0e0; display: none; }
+    button { margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <h1>Error Boundary Example</h1>
+
+  <!-- Normal UI -->
+  <div id="normalUI">
+    <p>This is the normal UI content.</p>
+  </div>
+
+  <!-- Error UI -->
+  <div id="errorUI">
+    <p>Something went wrong. Please try again later.</p>
+  </div>
+
+  <!-- Button to simulate error -->
+  <button id="triggerError">Trigger Error</button>
+
+  <script>
+    const normalUI = document.getElementById("normalUI");
+    const errorUI = document.getElementById("errorUI");
+    const triggerBtn = document.getElementById("triggerError");
+
+    triggerBtn.addEventListener("click", () => {
+      // Hide normal, show error
+      normalUI.style.display = "none";
+      errorUI.style.display = "block";
+    });
+  </script>
+</body>
+</html>

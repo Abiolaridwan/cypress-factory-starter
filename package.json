@@ -1,0 +1,25 @@
+{
+  "name": "cypress-factory-starter",
+  "version": "1.0.0",
+  "description": "A starter project with HTML, CSS, JavaScript, and Cypress for end-to-end testing.",
+  "main": "app.js",
+  "scripts": {
+    "start": "serve .",
+    "test": "cypress run",
+    "cypress:open": "cypress open"
+  },
+  "keywords": [
+    "cypress",
+    "starter",
+    "e2e",
+    "javascript",
+    "factory"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^13.17.0",
+    "cypress-file-upload": "^5.0.8",
+    "live-server": "^1.2.2"
+  }
+}

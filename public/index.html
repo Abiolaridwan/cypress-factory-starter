@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Biola.ng - Nigeria's Premier Job Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FontAwesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-laptop-code"></i>
+      <h1>Biola.ng</h1>
+    </div>
+    <i class="fa-solid fa-bars hamburger" id="hamburger"></i>
+    <nav id="mainNav">
+      <a href="#home"><i class="fa-solid fa-home"></i> Home</a>
+      <a href="#jobs"><i class="fa-solid fa-briefcase"></i> Jobs</a>
+      <a href="#about"><i class="fa-solid fa-info-circle"></i> About</a>
+      <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </nav>
+    <div class="header-actions">
+      <div class="auth-buttons">
+        <button id="showLogin"><i class="fa-solid fa-sign-in-alt"></i> Login</button>
+        <button id="showRegister"><i class="fa-solid fa-user-plus"></i> Register</button>
+      </div>
+      <i id="themeToggle" class="fa-solid fa-circle-half-stroke theme-toggle" aria-label="Toggle Theme"></i>
+    </div>
+  </header>
+
+  <!-- Search Section -->
+  <section class="search-section" id="home">
+    <div class="search-container">
+      <h2><i class="fa-solid fa-search"></i> Find Your Dream Job in Nigeria</h2>
+      <p>Cypress QA Testing Mockup App</p>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for jobs, companies, or skills...">
+        <button id="searchBtn"><i class="fa-solid fa-search"></i> Search</button>
+      </div>
+      <div class="search-suggestions">
+        <span class="suggestion-tag" data-search="software engineer">Software Engineer</span>
+        <span class="suggestion-tag" data-search="marketing">Marketing</span>
+        <span class="suggestion-tag" data-search="sales">Sales</span>
+        <span class="suggestion-tag" data-search="finance">Finance</span>
+        <span class="suggestion-tag" data-search="healthcare">Healthcare</span>
+        <span class="suggestion-tag" data-search="education">Education</span>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </section>
+
+  <div class="main-content">
+    <!-- Counter Component -->
+    <section class="counter">
+      <h2><i class="fa-solid fa-plus-minus"></i> My Job Application</h2>
+      <p>Track your applications</p>
+      <div id="countValue">0</div>
+      <div>
+        <button id="decrement"><i class="fa-solid fa-minus"></i> Remove</button>
+        <button id="increment"><i class="fa-solid fa-plus"></i> Add</button>
+        <button id="reset"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+      </div>
+    </section>
+
+    <!-- Modal Trigger -->
+    <section style="text-align:center; margin: 2rem 0;">
+      <button id="openModal" class="btn-primary">
+        <i class="fa-solid fa-window-maximize"></i> Open Job Details
+      </button>
+    </section>
+
+    <!-- Tabs/Navigation -->
+    <section class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="tab1"><i class="fa-solid fa-briefcase"></i> Recent Jobs</button>
+        <button class="tab-btn" data-tab="tab2"><i class="fa-solid fa-users"></i> Top Companies</button>
+        <button class="tab-btn" data-tab="tab3"><i class="fa-solid fa-chart-line"></i> Career Tips</button>
+      </div>
+      <div id="tab1" class="tab-content active">
+        <h3>Latest Job Opportunities</h3>
+        <p>Browse through the most recent job postings from top Nigerian companies. Updated daily with fresh opportunities across all industries.</p>
+        <div class="job-card">
+          <h4>Senior Software Developer</h4>
+          <p><i class="fa-solid fa-building"></i> TechCorp Nigeria | <i class="fa-solid fa-location-dot"></i> Lagos</p>
+          <p>Join our innovative team building next-generation fintech solutions...</p>
+        </div>
+      </div>
+      <div id="tab2" class="tab-content">
+        <h3>Featured Employers</h3>
+        <p>Connect with Nigeria's leading companies actively hiring talented professionals like you.</p>
+        <ul class="company-list">
+          <li><i class="fa-solid fa-star"></i> Dangote Group</li>
+          <li><i class="fa-solid fa-star"></i> MTN Nigeria</li>
+          <li><i class="fa-solid fa-star"></i> Guaranty Trust Bank</li>
+          <li><i class="fa-solid fa-star"></i> Flutterwave</li>
+        </ul>
+      </div>
+      <div id="tab3" class="tab-content">
+        <h3>Career Development Resources</h3>
+        <p>Expert advice and resources to help you advance your career in Nigeria's competitive job market.</p>
+        <ul class="tips-list">
+          <li><i class="fa-solid fa-lightbulb"></i> How to write a compelling CV</li>
+          <li><i class="fa-solid fa-lightbulb"></i> Interview preparation strategies</li>
+          <li><i class="fa-solid fa-lightbulb"></i> Salary negotiation tips</li>
+          <li><i class="fa-solid fa-lightbulb"></i> Building your professional network</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- File Upload -->
+    <section class="file-upload">
+      <h2><i class="fa-solid fa-file-upload"></i> Upload Your CV</h2>
+      <div class="file-upload-area" id="fileUploadArea">
+        <i class="fa-solid fa-cloud-upload-arrow-up"></i>
+        <p>Click to upload or drag and drop your CV</p>
+        <p class="small-text">Supported formats: PDF, DOC, DOCX (Max 5MB)</p>
+      </div>
+      <input type="file" id="fileInput" accept=".pdf,.doc,.docx">
+      <div class="file-info" id="fileInfo"></div>
+    </section>
+
+    <!-- API Section -->
+    <section class="api-section">
+      <h2><i class="fa-solid fa-network-wired"></i> Job Recommendations API</h2>
+      <p>Get personalized job recommendations based on your profile</p>
+      <button id="fetchData"><i class="fa-solid fa-download"></i> <span id="fetchText">Fetch Recommendations</span></button>
+      <div class="success-message" id="apiSuccess">Data fetched successfully!</div>
+      <pre id="apiResult"></pre>
+    </section>
+  </div>
+
+  <!-- Modals -->
+  
+  <!-- Job Details Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <h3><i class="fa-solid fa-briefcase"></i> Job Details</h3>
+      <h4>Senior Software Developer</h4>
+      <p><strong>Company:</strong> TechCorp Nigeria</p>
+      <p><strong>Location:</strong> Lagos, Nigeria</p>
+      <p><strong>Salary:</strong> ₦2,000,000 - ₦3,500,000 annually</p>
+      <p><strong>Requirements:</strong> 5+ years experience, JavaScript, React, Node.js</p>
+      <button id="closeModal"><i class="fa-solid fa-xmark"></i> Close</button>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <div class="form-container" style="margin: 0; box-shadow: none;">
+        <h2><i class="fa-solid fa-sign-in-alt"></i> Login to Your Account</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail"><i class="fa-solid fa-envelope"></i> Email Address</label>
+            <input type="email" id="loginEmail" required>
+            <div class="error-message" id="loginEmailError">Please enter a valid email address</div>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword"><i class="fa-solid fa-lock"></i> Password</label>
+            <input type="password" id="loginPassword" required>
+            <div class="error-message" id="loginPasswordError">Password is required</div>
+          </div>
+          <button type="submit" class="form-button" id="loginSubmit">
+            <i class="fa-solid fa-sign-in-alt"></i> Login
+          </button>
+        </form>
+        <div class="form-toggle">
+          Don't have an account? <a href="#" id="switchToRegister">Register here</a>
+        </div>
+        <div class="success-message" id="loginSuccess">Login successful! Welcome back!</div>
+      </div>
+      <button id="closeLoginModal" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <div class="form-container" style="margin: 0; box-shadow: none;">
+        <h2><i class="fa-solid fa-user-plus"></i> Create Your Account</h2>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="regFirstName"><i class="fa-solid fa-user"></i> First Name</label>
+            <input type="text" id="regFirstName" required>
+            <div class="error-message" id="regFirstNameError">First name is required</div>
+          </div>
+          <div class="form-group">
+            <label for="regLastName"><i class="fa-solid fa-user"></i> Last Name</label>
+            <input type="text" id="regLastName" required>
+            <div class="error-message" id="regLastNameError">Last name is required</div>
+          </div>
+          <div class="form-group">
+            <label for="regEmail"><i class="fa-solid fa-envelope"></i> Email Address</label>
+            <input type="email" id="regEmail" required>
+            <div class="error-message" id="regEmailError">Please enter a valid email address</div>
+          </div>
+          <div class="form-group">
+            <label for="regPhone"><i class="fa-solid fa-phone"></i> Phone Number</label>
+            <input type="tel" id="regPhone" placeholder="+234..." required>
+            <div class="error-message" id="regPhoneError">Please enter a valid phone number</div>
+          </div>
+          <div class="form-group">
+            <label for="regLocation"><i class="fa-solid fa-location-dot"></i> Location</label>
+            <select id="regLocation" required>
+              <option value="">Select your state</option>
+              <option value="lagos">Lagos</option>
+              <option value="abuja">Abuja</option>
+              <option value="kano">Kano</option>
+              <option value="rivers">Rivers</option>
+              <option value="oyo">Oyo</option>
+              <option value="kaduna">Kaduna</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="error-message" id="regLocationError">Please select your location</div>
+          </div>
+          <div class="form-group">
+            <label for="regIndustry"><i class="fa-solid fa-industry"></i> Industry</label>
+            <select id="regIndustry" required>
+              <option value="">Select your industry</option>
+              <option value="technology">Technology</option>
+              <option value="finance">Finance & Banking</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="education">Education</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="retail">Retail</option>
+              <option value="consulting">Consulting</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="error-message" id="regIndustryError">Please select your industry</div>
+          </div>
+          <div class="form-group">
+            <label for="regPassword"><i class="fa-solid fa-lock"></i> Password</label>
+            <input type="password" id="regPassword" required>
+            <div class="error-message" id="regPasswordError">Password must be at least 8 characters</div>
+          </div>
+          <div class="form-group">
+            <label for="regConfirmPassword"><i class="fa-solid fa-lock"></i> Confirm Password</label>
+            <input type="password" id="regConfirmPassword" required>
+            <div class="error-message" id="regConfirmPasswordError">Passwords do not match</div>
+          </div>
+          <button type="submit" class="form-button" id="registerSubmit">
+            <i class="fa-solid fa-user-plus"></i> Create Account
+          </button>
+        </form>
+        <div class="form-toggle">
+          Already have an account? <a href="#" id="switchToLogin">Login here</a>
+        </div>
+        <div class="success-message" id="registerSuccess">Account created successfully! Please check your email to verify your account.</div>
+      </div>
+      <button id="closeRegisterModal" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Error Boundary -->
+  <section class="error-boundary" id="errorBoundary">
+    <h2><i class="fa-solid fa-triangle-exclamation"></i> Oops! Something went wrong!</h2>
+    <p>We're experiencing technical difficulties. Please try again later.</p>
+    <button onclick="location.reload()" style="background: #008000; color: white; border: none; padding: 1rem 2rem; border-radius: 5px; cursor: pointer; margin-top: 1rem;">
+      <i class="fa-solid fa-refresh"></i> Retry
+    </button>
+  </section>
+
+  <!-- 404 Page -->
+  <section class="page404" id="page404">
+    <h1><i class="fa-solid fa-circle-xmark"></i> 404</h1>
+    <p>The page you're looking for doesn't exist</p>
+    <a href="#"><i class="fa-solid fa-home"></i> Go Back Home</a>
+  </section>
+
+
+  <!-- Custom JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
